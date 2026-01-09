@@ -2,7 +2,7 @@
 
 A lightweight, in-memory REST API for managing personal notes with authentication and authorization.
 
-## 🎯 Features
+## Features
 
 - **Mock Authentication**: Simple token-based auth supporting multiple users
 - **CRUD Operations**: Create, read, update, and delete notes
@@ -11,14 +11,56 @@ A lightweight, in-memory REST API for managing personal notes with authenticatio
 - **Logging**: Request/response logging with timing
 - **Health Check**: Monitor API status
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Runtime**: Node.js with TypeScript
 - **Framework**: Express.js
 - **Storage**: In-memory (Map-based)
 - **ID Generation**: UUID v4
 
-## 📁 Project Structure
+## Screenshots
+
+### Health Check Endpoint
+Health check returns API status and timestamp.
+
+![Health Check](screenshots/healthcheck.png)
+
+### User Login and Token Generation
+Alice logs in and receives a fake authentication token for API access.
+
+![Alice Login](screenshots/aliceloginandfaketokengenerate.png)
+
+### Create Notes
+Alice creates a new note with title and body using her authentication token.
+
+![Create Notes](screenshots/alicecreatenotes.png)
+
+### List User Notes
+Alice retrieves all her notes sorted by creation time (newest first).
+
+![List Notes](screenshots/listnotesbyalice.png)
+
+### Delete Own Notes (204 Success)
+Alice successfully deletes her own note and receives HTTP 204 No Content response.
+
+![Delete Own Note](screenshots/deletenotesbyself204.png)
+
+### Authorization Check (403 Forbidden)
+Bob attempts to delete Alice's note and receives HTTP 403 Forbidden error demonstrating proper authorization.
+
+![Authorization Failed](screenshots/deletenotesbybobofalice403.png)
+
+### Invalid Token Error (401 Unauthorized)
+Request with invalid or expired token is rejected with HTTP 401 Unauthorized error.
+
+![Invalid Token](screenshots/invalidorexpiredtoken.png)
+
+### Validation Error (400 Bad Request)
+Creating a note with empty title fails validation and returns HTTP 400 with error message.
+
+![Validation Error](screenshots/titlerequirederror.png)
+
+## Project Structure
 
 ```
 QuickNotes/
@@ -41,7 +83,7 @@ QuickNotes/
 └── README.md
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -69,7 +111,7 @@ npm run build
 npm start
 ```
 
-## 📡 API Endpoints
+## API Endpoints
 
 ### 1. Health Check
 
@@ -258,7 +300,7 @@ curl -X DELETE http://localhost:3000/notes/note_abc123 \
 
 ---
 
-## 🔐 Authentication & Authorization
+## Authentication & Authorization
 
 All note endpoints require authentication via Bearer token:
 
@@ -271,7 +313,7 @@ Authorization: Bearer <token>
 - `403 Forbidden`: Valid token but trying to access another user's note
 - `404 Not Found`: Note doesn't exist
 
-## 🧪 Testing Multiple Users
+## Testing Multiple Users
 
 ```bash
 # User 1: Alice
@@ -299,7 +341,7 @@ curl -X PATCH http://localhost:3000/notes/ALICE_NOTE_ID \
   -d '{"title": "Hacked"}'
 ```
 
-## 📝 Example Workflow
+## Example Workflow
 
 ```bash
 # 1. Health check
@@ -331,7 +373,7 @@ curl -X DELETE http://localhost:3000/notes/$NOTE_ID \
   -H "Authorization: Bearer $TOKEN"
 ```
 
-## 🎨 Extra Feature: Logging
+## Extra Feature: Logging
 
 All requests are logged with:
 - Timestamp
@@ -349,7 +391,7 @@ Example output:
 [2026-01-09T10:00:20.000Z] DELETE /notes/note_abc123 204 - 2ms
 ```
 
-## ✨ What I'd Improve with More Time
+## What I'd Improve with More Time
 
 1. **Persistence**: Use SQLite or PostgreSQL instead of in-memory storage
 2. **Real JWT**: Implement proper JWT tokens with expiration and refresh tokens
@@ -364,8 +406,3 @@ Example output:
 11. **Input Sanitization**: XSS protection for note content
 12. **CORS Configuration**: Proper CORS setup for frontend integration
 
-## 📄 License
-
-MIT
-
-# Quick-Notes
