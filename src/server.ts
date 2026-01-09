@@ -23,8 +23,8 @@ app.use((req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Quick Notes API running on http://localhost:${PORT}`);
-  console.log(`📝 Endpoints:`);
+  console.log(`Quick Notes API running on http://localhost:${PORT}`);
+  console.log(`Endpoints:`);
   console.log(`   POST   /auth/mock-login`);
   console.log(`   POST   /notes`);
   console.log(`   GET    /notes`);
